@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Disaster Tweet Classifier</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#f4f6fa;margin:0;color:#1d2433}
+main{max-width:640px;margin:40px auto;padding:0 16px}
+.card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 10px #0001}
+textarea{width:100%;height:110px;padding:10px;font-size:16px;border:1px solid #c5ccd8;border-radius:8px;box-sizing:border-box}
+button{background:#1f4e9c;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:16px;cursor:pointer;margin-top:10px}
+#result{margin-top:18px;padding:14px;border-radius:8px;display:none;font-size:18px}
+.yes{background:#fde8e7;color:#a12622}.no{background:#e6f4ea;color:#1e6b34}
+.bar{height:10px;background:#dde2ea;border-radius:5px;margin-top:8px}.bar div{height:100%;border-radius:5px;background:#d9534f}
+.ex a{display:block;color:#1f4e9c;cursor:pointer;margin:4px 0;font-size:14px}
+</style></head><body><main>
+<h1>Disaster Tweet Classifier</h1>
+<div class="card">
+<p>Paste a tweet. The model tells you whether it is about a <b>real disaster</b>.</p>
+<textarea id="t" placeholder="e.g. Forest fire near La Ronge Sask. Canada"></textarea><br>
+<button onclick="go()">Classify</button>
+<div id="result"></div>
+<div class="ex"><p>Try an example:</p>
+<a onclick="ex(this)">Wildfire smoke covers the city, residents told to evacuate</a>
+<a onclick="ex(this)">Your new song is fire lol</a>
+<a onclick="ex(this)">I'm flooded with work this week</a>
+</div></div></main>
+<script>
+function ex(a){document.getElementById('t').value=a.textContent;go()}
+async function go(){
+ const r=document.getElementById('result'),text=document.getElementById('t').value;
+ const res=await fetch('/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+ const d=await res.json();r.style.display='block';
+ if(!res.ok){r.className='';r.textContent=d.error;return}
+ r.className=d.disaster?'yes':'no';
+ r.innerHTML='<b>'+d.label+'</b> &mdash; disaster probability '+(d.probability*100).toFixed(1)+'%<div class="bar"><div style="width:'+d.probability*100+'%"></div></div>';
+}
+</script></body></html>

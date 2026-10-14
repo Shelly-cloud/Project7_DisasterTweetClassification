@@ -1,0 +1,422 @@
+{
+ "shape": [
+  7613,
+  5
+ ],
+ "dtypes": {
+  "id": "int64",
+  "keyword": "object",
+  "location": "object",
+  "text": "object",
+  "target": "int64"
+ },
+ "nulls": {
+  "id": 0,
+  "keyword": 61,
+  "location": 2534,
+  "text": 0,
+  "target": 0
+ },
+ "dups": 110,
+ "class_counts": {
+  "0": 4342,
+  "1": 3271
+ },
+ "conflicting_dup_texts": 18,
+ "rows_after_dedup": 7503,
+ "top_disaster": [
+  [
+   "news",
+   146
+  ],
+  [
+   "disaster",
+   116
+  ],
+  [
+   "california",
+   114
+  ],
+  [
+   "police",
+   108
+  ],
+  [
+   "suicide",
+   106
+  ],
+  [
+   "people",
+   102
+  ],
+  [
+   "killed",
+   95
+  ],
+  [
+   "like",
+   93
+  ],
+  [
+   "hiroshima",
+   93
+  ],
+  [
+   "storm",
+   89
+  ],
+  [
+   "just",
+   88
+  ],
+  [
+   "crash",
+   85
+  ],
+  [
+   "fires",
+   85
+  ],
+  [
+   "pm",
+   84
+  ],
+  [
+   "families",
+   79
+  ]
+ ],
+ "top_non": [
+  [
+   "like",
+   252
+  ],
+  [
+   "just",
+   234
+  ],
+  [
+   "new",
+   171
+  ],
+  [
+   "don",
+   137
+  ],
+  [
+   "body",
+   116
+  ],
+  [
+   "video",
+   95
+  ],
+  [
+   "people",
+   92
+  ],
+  [
+   "love",
+   91
+  ],
+  [
+   "day",
+   86
+  ],
+  [
+   "know",
+   86
+  ],
+  [
+   "got",
+   85
+  ],
+  [
+   "time",
+   84
+  ],
+  [
+   "emergency",
+   80
+  ],
+  [
+   "going",
+   76
+  ],
+  [
+   "let",
+   73
+  ]
+ ],
+ "train": 6002,
+ "test": 1501,
+ "tfidf_vocab": 8943,
+ "feature_ablation_f1_cv": {
+  "TF-IDF words": 0.7405181304315109,
+  "TF-IDF word+char": 0.7573410109129991,
+  "TF-IDF word+char+extra": 0.7602251308293178
+ },
+ "best_feature_set": "TF-IDF word+char+extra",
+ "extras_only_f1_cv": 0.5582937024613885,
+ "lsa_only_f1_cv": 0.6749463424488044,
+ "models": {
+  "Logistic Regression": {
+   "best_params": {
+    "C": "3"
+   },
+   "cv_f1": 0.7602251308293178,
+   "train_f1": 0.922765051692682,
+   "accuracy": 0.8181212524983345,
+   "precision": 0.8191304347826087,
+   "recall": 0.7359375,
+   "f1": 0.7753086419753087,
+   "roc_auc": 0.868024099883856,
+   "pr_auc": 0.8665707327182508
+  },
+  "Linear SVM": {
+   "best_params": {
+    "C": "0.3"
+   },
+   "cv_f1": 0.7602508101411131,
+   "train_f1": 0.9266017842660178,
+   "accuracy": 0.8114590273151232,
+   "precision": 0.8104347826086956,
+   "recall": 0.728125,
+   "f1": 0.7670781893004115,
+   "roc_auc": 0.8664888211382115,
+   "pr_auc": 0.8601344966611291
+  },
+  "Naive Bayes": {
+   "best_params": {
+    "alpha": "0.3"
+   },
+   "cv_f1": 0.7418308337958301,
+   "train_f1": 0.847932131495228,
+   "accuracy": 0.8194536975349767,
+   "precision": 0.8487712665406427,
+   "recall": 0.7015625,
+   "f1": 0.7681779298545766,
+   "roc_auc": 0.8576410060975611,
+   "pr_auc": 0.8624968396398932
+  },
+  "Random Forest": {
+   "best_params": {
+    "max_depth": "None",
+    "n_estimators": "400"
+   },
+   "cv_f1": 0.6834442683865949,
+   "train_f1": 0.9962766999804037,
+   "accuracy": 0.798800799467022,
+   "precision": 0.8755555555555555,
+   "recall": 0.615625,
+   "f1": 0.7229357798165138,
+   "roc_auc": 0.8533355110336817,
+   "pr_auc": 0.8537116074061729
+  },
+  "Neural Net (MLP on LSA)": {
+   "best_params": {
+    "alpha": "0.0001",
+    "hidden_layer_sizes": "(128, 64)"
+   },
+   "cv_f1": 0.7117707721429748,
+   "train_f1": 0.749345681497886,
+   "accuracy": 0.770819453697535,
+   "precision": 0.7491582491582491,
+   "recall": 0.6953125,
+   "f1": 0.7212317666126418,
+   "roc_auc": 0.833831482288037,
+   "pr_auc": 0.8264482671597221
+  }
+ },
+ "best_model": "Logistic Regression",
+ "best_confusion": [
+  [
+   757,
+   104
+  ],
+  [
+   169,
+   471
+  ]
+ ],
+ "learning_curve": {
+  "train": 0.9327191551526383,
+  "cv": 0.7606395540257389
+ },
+ "overfit_gap_best": 0.14745640971737328,
+ "deploy_model_test": {
+  "accuracy": 0.8081279147235176,
+  "precision": 0.7962962962962963,
+  "recall": 0.7390625,
+  "f1": 0.766612641815235
+ },
+ "robust_f1_noisy": 0.7352941176470589,
+ "probes": [
+  [
+   "Forest fire near my house, evacuation ordered",
+   0.9883903422398314
+  ],
+  [
+   "Your new song is fire lol",
+   0.007685230017365485
+  ],
+  [
+   "Earthquake of magnitude 6.1 hits the coast, buildings collapsed",
+   0.9794414219330205
+  ],
+  [
+   "I'm flooded with work this week",
+   0.2684667136046626
+  ],
+  [
+   "Massive flood waters rising, people trapped on rooftops",
+   0.8901461988039213
+  ],
+  [
+   "That concert was a total bomb haha",
+   0.6875190361045689
+  ],
+  [
+   "Wildfire smoke covers the city, residents told to evacuate",
+   0.9704988332999767
+  ],
+  [
+   "Just ate a burning hot curry, my mouth is on fire",
+   0.7174772594177947
+  ]
+ ],
+ "errors": [
+  [
+   "#DebateQuestionsWeWantToHear If U start another war would U B willing 2 go 2 the war-zone yourself or send UR sons and/or daughters 2 fight?",
+   1
+  ],
+  [
+   "@SnowyWolf5 @TheGreenParty Besides would you rather shut down a whole nuclear reactor for maintenance or a wind turbine at a time?",
+   1
+  ],
+  [
+   "All you have to do is look up sports riots on google and you'll see more than couches being burned.. You fr gotta go https://t.co/P1AmgINsYs",
+   1
+  ],
+  [
+   "One Direction Is my pick for http://t.co/q2eBlOKeVE Fan Army #Directioners http://t.co/eNCmhz6y34 x1392",
+   1
+  ],
+  [
+   "@OllyMursAus I do feel sorry for him! He is not a piece of meat! He is a nice guy... People don't need to rush him and screams in his face!",
+   1
+  ],
+  [
+   "Worked in factory pressing designs onto T-shirts was electrocuted \nd/t faulty ground. Boss docked my pay while I was at ER #WorstSummerJob",
+   1
+  ],
+  [
+   "We just happened to get on the same road right behind the buses I'm dead serious",
+   0
+  ],
+  [
+   "Oh shit its rly sheeting\nAaaaaand there's the thunder and lightning\nI missed summer storms",
+   1
+  ]
+ ],
+ "top_coef_pos": [
+  [
+   "fires",
+   2.475730065152152
+  ],
+  [
+   "earthquake",
+   2.320302696886825
+  ],
+  [
+   "hiroshima",
+   2.3188896893748794
+  ],
+  [
+   "distance",
+   2.302584932049642
+  ],
+  [
+   "bombing",
+   2.133096073107866
+  ],
+  [
+   "japan",
+   2.1299948505622384
+  ],
+  [
+   "shot",
+   2.056352255413716
+  ],
+  [
+   "near",
+   2.0082744988083125
+  ],
+  [
+   "mass murder",
+   1.9846746255801953
+  ],
+  [
+   "car",
+   1.958283250642417
+  ],
+  [
+   "mass",
+   1.9495080360521369
+  ],
+  [
+   "drought",
+   1.9139904568184982
+  ]
+ ],
+ "top_coef_neg": [
+  [
+   "head",
+   -2.1000097990546047
+  ],
+  [
+   "new",
+   -2.0301962551275934
+  ],
+  [
+   "demolish",
+   -1.7901789388091487
+  ],
+  [
+   "jobs",
+   -1.7183015929035665
+  ],
+  [
+   "art",
+   -1.6397314714096103
+  ],
+  [
+   "finally",
+   -1.6307095709082235
+  ],
+  [
+   "wants",
+   -1.6126696970866354
+  ],
+  [
+   "cake",
+   -1.568126894417998
+  ],
+  [
+   "better",
+   -1.5568013783606724
+  ],
+  [
+   "gets",
+   -1.552234094757548
+  ],
+  [
+   "ruin",
+   -1.5454052832274794
+  ],
+  [
+   "self",
+   -1.5280376796774238
+  ]
+ ]
+}
