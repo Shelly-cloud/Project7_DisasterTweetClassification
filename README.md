@@ -24,6 +24,42 @@ Known limits: the model overfits (train F1 0.93 vs CV F1 0.76), and figurative u
 4. **Evaluation and validation:** metrics, ROC and PR curves, confusion matrices, learning curve, noise-robustness test, metaphor probes.
 5. **Deployment:** pickled pipeline served by Flask.
 
+## Examples: input tweet and model output
+
+The model returns the probability that a tweet is about a real disaster. A probability of 0.5 or higher is labelled **Real disaster**. These are real outputs from the saved model.
+
+**Correctly classified**
+
+| Tweet | P(disaster) | Prediction |
+|---|---|---|
+| Forest fire near La Ronge Sask. Canada | 0.988 | Real disaster |
+| 13,000 people receive #wildfires evacuation orders in California | 0.991 | Real disaster |
+| Earthquake of magnitude 6.1 hits the coast, buildings collapsed | 0.979 | Real disaster |
+| Massive flood waters rising, people trapped on rooftops | 0.890 | Real disaster |
+| Three people died from the heat wave so far | 0.880 | Real disaster |
+| Your new song is fire lol | 0.008 | Not a disaster |
+| I'm flooded with work this week | 0.268 | Not a disaster |
+| What a goooooooaaaaaal!!!!!!! | 0.061 | Not a disaster |
+| I love fruits | 0.019 | Not a disaster |
+
+**Hard cases the model gets wrong.** The figurative use of a disaster word still fools it:
+
+| Tweet | P(disaster) | Prediction | Truth |
+|---|---|---|---|
+| That concert was a total bomb haha | 0.688 | Real disaster | Not a disaster |
+| Just ate a burning hot curry, my mouth is on fire | 0.717 | Real disaster | Not a disaster |
+
+A contextual model such as BERT would handle these better (see Next steps).
+
+**Why it decides this way.** The words that push the score most towards "disaster" are *fires, earthquake, hiroshima, bombing, japan, shot, near*. The words that push towards "not a disaster" include *new, jobs, art, finally, wants, cake*. The cleaning step removes URLs, @mentions, `#` signs and punctuation first, so `#wildfires` is read as `wildfires`.
+
+**Web app.** Paste a tweet into the box and click Classify. You get a verdict and a probability bar, for example:
+
+```
+Input : Wildfire smoke covers the city, residents told to evacuate
+Output: Real disaster, disaster probability 97.0%
+```
+
 ## Repository layout
 
 ```
@@ -58,6 +94,9 @@ API example:
 curl -X POST localhost:5000/predict -H "Content-Type: application/json" \
      -d '{"text": "Forest fire near La Ronge Sask. Canada"}'
 # {"disaster": true, "label": "Real disaster", "probability": 0.9882}
+
+curl -X POST localhost:5000/predict -H "Content-Type: application/json" \n     -d '{"text": "Your new song is fire lol"}'
+# {"disaster": false, "label": "Not a disaster", "probability": 0.0077}
 ```
 
 ## Deployment
