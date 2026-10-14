@@ -39,7 +39,7 @@ The model returns the probability that a tweet is about a real disaster. A proba
 | Three people died from the heat wave so far | 0.880 | Real disaster |
 | Your new song is fire lol | 0.008 | Not a disaster |
 | I'm flooded with work this week | 0.268 | Not a disaster |
-| What a goooooooaaaaaal!!!!!!! | 0.061 | Not a disaster |
+| What a goooooooaaaaaal!!!!!! | 0.061 | Not a disaster |
 | I love fruits | 0.019 | Not a disaster |
 
 **Hard cases the model gets wrong.** The figurative use of a disaster word still fools it:
